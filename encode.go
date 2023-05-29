@@ -85,6 +85,14 @@ func encode(files []string, to, output string) error {
 	}
 	defer out.Close()
 
+	var attackName string
+	// output without extension
+	if strings.Contains(output, ".") {
+		attackName = output[:strings.LastIndex(output, ".")]
+	} else {
+		attackName = output
+	}
+
 	var enc vegeta.Encoder
 	switch to {
 	case encodingCSV:
@@ -113,8 +121,11 @@ func encode(files []string, to, output string) error {
 				break
 			}
 			return err
-		} else if err = enc.Encode(&r); err != nil {
-			return err
+		} else {
+			r.Attack = attackName
+			if err = enc.Encode(&r); err != nil {
+				return err
+			}
 		}
 	}
 
