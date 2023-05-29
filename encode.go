@@ -89,8 +89,13 @@ func encode(files []string, to, output string) error {
 	// output without extension
 	if strings.Contains(output, ".") {
 		attackName = output[:strings.LastIndex(output, ".")]
+		// if its a directory, take only the last part /
 	} else {
 		attackName = output
+	}
+
+	if strings.Contains(attackName, "/") {
+		attackName = attackName[strings.LastIndex(attackName, "/")+1:]
 	}
 
 	var enc vegeta.Encoder
