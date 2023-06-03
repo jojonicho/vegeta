@@ -61,7 +61,6 @@ func plotCmd() command {
 }
 
 func plotRun(files []string, threshold int, title, output string) error {
-	fmt.Println("plotRun")
 	dec, mc, err := decoder(files)
 	defer mc.Close()
 	if err != nil {

@@ -279,7 +279,6 @@ func labelColors(labels []string) []string {
 		}
 		colors = append(colors, color)
 	}
-	fmt.Println(colors)
 
 	return colors
 }
